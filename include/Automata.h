@@ -3,6 +3,7 @@
 
 #include <pthread.h>
 #include <iostream>
+#include <string>
 #include <map>
 
 enum class states {
@@ -23,16 +24,20 @@ private:
 public:
     Automata();
     Automata(std::map<std::string, unsigned>);
+
     states getState();
     unsigned getCash();
+    void getMenu();
     
     void on();
     void off();
     void coin(int);
-    void choise(std::string);
+    void choise();
     void check(std::string);
     void canscel();
     void cook();
     void finish();
+
+    void start();
 };
 #endif  // INCLUDE_AUTOMATA_H_

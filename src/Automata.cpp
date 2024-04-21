@@ -30,6 +30,11 @@ unsigned Automata::getCash(){
     return this->cash;
 }
 
+void Automata::getMenu(){
+    for (const auto& element : menu)
+    std::cout << element.first << "\t" << element.second << std::endl;
+}
+
 void Automata::canscel(){
     this->state = states::Wait;
 }
@@ -39,8 +44,11 @@ void Automata::coin(int value){
     this->cash += value;
 }
 
-void Automata::choise(std::string name){
+void Automata::choise(){
     this->state = states::Check;
+    
+    std::string name;
+    name = "coffee";
     Automata::check(name);
 }
 
@@ -52,6 +60,7 @@ void Automata::cook(){
 void Automata::check(std::string name){
     if(this->cash >= this->menu[name]){
         this->state = states::Cook;
+        this->cash -= this->menu[name];
         this->cook();
     } else {
         this->canscel();
@@ -62,3 +71,11 @@ void Automata::finish(){
     this->state = states::Wait;
 }
 
+void Automata::start(){
+    this->on();
+    this->coin(10);
+    this->choise();
+    this->coin(10);
+    this->choise();
+    this->off();
+}
